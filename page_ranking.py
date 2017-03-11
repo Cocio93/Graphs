@@ -43,24 +43,24 @@ def path_cost(p):
 		path_sum += graph_scores[node]
 	return path_sum
 
-def find_path(graph, start, end, path=[], max=False):
+def find_path(graph, start, end, path=[], max=True):
 	path = path + [start]
 	if start == end:
 		return path
 	if not graph[start]:
 		return None
-	shortest = None
+	best_path = None
 	for node in graph[start]:
 		if node not in path:
 			newpath = find_path(graph, node, end, path, max)
 			if newpath:
 				if max:
-					if not shortest or path_cost(newpath) > path_cost(shortest):
-						shortest = newpath
+					if not best_path or path_cost(newpath) > path_cost(best_path):
+						best_path = newpath
 				if not max:
-					if not shortest or path_cost(newpath) < path_cost(shortest):
-						shortest = newpath
-	return shortest
+					if not best_path or path_cost(newpath) < path_cost(best_path):
+						best_path = newpath
+	return best_path
 
 path = find_path(graph, 'A', 'D')
 print(path, "Cost:", path_cost(path))
