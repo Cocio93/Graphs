@@ -43,7 +43,7 @@ def path_cost(p):
 		path_sum += graph_scores[node]
 	return path_sum
 
-def find_path(graph, start, end, path=[], max=True):
+def find_path(graph, start, end, path=[], max=False):
 	path = path + [start]
 	if start == end:
 		return path
